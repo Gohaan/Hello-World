@@ -30,13 +30,46 @@ void Ligne::ImportationArret(const string& nomfichier){
         cerr<<"Impossible d'ouvrir le fichier! Veuillez verifier l'ortographe."<<endl;
 }
 
-void Ligne::afficheLigne()
+void Ligne::afficheLigneTexte()
 {
    if(d_nbArrets != 0 )
      for(int i=0 ; i < d_nbArrets ; i++ )
                 cout << TabArret[i].nomarret()<<' '<< TabArret[i].posx() << ' ' << TabArret[i].posy() <<' '<<endl ;
      else
          cout<<"Aucun arret a afficher.";  
+}
+
+void Ligne::afficheLigneGraphique()
+{
+    initwindow(1300, 400, "Tramways" );
+    outtextxy(650,20,"Ligne 2");
+    setcolor(WHITE);
+
+    int xi = TabArret[0].posx(), yi= TabArret[0].posy(), xf = TabArret[d_nbArrets-1].posx(), yf = TabArret[d_nbArrets-1].posy() ;
+
+    line(xi,yi,xf,yf);
+
+    for(int i=0; i<d_nbArrets; i++){
+        xi = TabArret[i].posx(); yi = TabArret[i].posy();
+        if(i%2==0)
+            outtextxy(xi-10,yi-30, const_cast<char *>(TabArret[i].nomarret().c_str() ) );
+        else
+            outtextxy(xi-10,yi+30, const_cast<char *>(TabArret[i].nomarret().c_str() ) );
+        line(xi,yi-10,xi,yi+10);
+    }
+
+    while (!kbhit( ))
+    {
+        delay(200);
+    }
+}
+
+Arret& Ligne::coordArret(int i){
+    return TabArret[i];
+}
+
+string Ligne::nomArret(int i){
+    return TabArret[i].nomarret();
 }
 
 const int Ligne::nombreArrets(){
@@ -53,7 +86,7 @@ Ligne::~Ligne(){
 
 
 const ostream& operator<<(ostream& os , Ligne& l ){
-         l.afficheLigne() ; 
+         l.afficheLigneTexte() ; 
          return os ; 
 } 
 

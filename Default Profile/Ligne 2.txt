@@ -1,0 +1,29 @@
+14 2
+Coteaux.
+10 100
+Nations.
+100 100
+Bel-Air.
+190 100
+Illberg.
+280 100
+Universite.
+370 100
+Palais des sports.
+460 100
+Daguerre.
+550 100
+Tour Nessel.
+640 100
+Porte-Haute.
+730 100
+Mairie.
+820 100
+Porte-Jeune.
+910 100
+Nordfeld.
+1000 100
+Lefebvre.
+1090 100
+Nouveau-Bassin.
+1180 100
