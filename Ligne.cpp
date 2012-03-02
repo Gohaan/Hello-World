@@ -17,17 +17,17 @@ void Ligne::ImportationArret(const string& nomfichier){
     if(fin){
             fin>>d_nbArrets;
             fin>>d_numLigne;
-            TabArret=new Arret[d_nbArrets];
+            TabArret=new Arrets[d_nbArrets];
             while(!fin.eof()) {
                 getline(fin,s,'.');
                 fin>>x;
                 fin>>y;
-                TabArret[i] = Arret(x,y,s);
+                TabArret[i] = Arrets(x,y,s);
                 i++;
             }
     }
     else
-        cerr<<"Impossible d'ouvrir le fichier! Veuillez verifier l'ortographe."<<endl;
+        cerr<<"Impossible d'ouvrir le fichier! Veuillez verifier l'orthographe."<<endl;
 }
 
 void Ligne::afficheLigneTexte()
@@ -84,6 +84,9 @@ Ligne::~Ligne(){
       delete[] TabArret;
 }
 
+Ligne& Ligne::operator<<(const string& s){
+    //A CODER   
+}
 
 const ostream& operator<<(ostream& os , Ligne& l ){
          l.afficheLigneTexte() ; 

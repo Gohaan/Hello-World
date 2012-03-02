@@ -11,10 +11,9 @@ class Arret{
       public:
              Arret();
              Arret(int x, int y,const string& nom);
-             Arret(const string& nomfichier);
              const int posx();
              const int posy();
-             const string nomarret();
+             const string nomArret();
       private:
               int d_x,d_y;
               string d_nom;

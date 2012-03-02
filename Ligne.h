@@ -22,6 +22,7 @@ class Ligne{
      string nomArret(int i);
      const int nombreArrets();
      const int numeroLigne();
+     Ligne& operator<<(const string& s)
   private:
      int d_numLigne;
      int d_nbArrets;

@@ -1,0 +1,49 @@
+26
+Coteaux.
+10 100
+Nations.
+100 100
+Bel-Air.
+190 100
+Illberg.
+280 100
+Universite.
+370 100
+Palais des sports.
+460 100
+Daguerre.
+550 100
+Tour Nessel.
+640 100
+Porte Haute.
+730 100
+Mairie.
+820 100
+Porte Jeune.
+910 150
+Nordfeld.
+1000 200
+Lefebvre.
+1090 200
+Nouveau Bassin.
+1180 200
+Saint Nazaire.
+10 200
+Tuilerie.
+100 200
+Rattachement.
+190 200
+Stade de Bourtzwiller.
+280 200
+Doller.
+370 200
+Musee de l'Auto.
+460 200
+Cite administrative.
+550 200
+Grand Rex.
+640 200
+Republique.
+730 100
+Gare.
+820 100
