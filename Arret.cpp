@@ -9,3 +9,4 @@ Arret::Arret(int x, int y, const string& nom): d_x(x), d_y(y) { d_nom = nom; }
 const int Arret::posx() { return d_x; }
 const int Arret::posy() { return d_y; }
 const string Arret::nomarret() { return d_nom; }
+//COUCOUCOU :)
