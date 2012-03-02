@@ -1,16 +1,16 @@
 #include <iostream>
 #include <graphics.h> 
-#include "Arret.h"
-#include "Ligne.h"
+#include "Importations.h"
 
 using namespace std;
 
 int main( )
 {
-    Ligne L2("Ligne 2.txt");
-    
-    L2.afficheLigneGraphique();
+    Importations test;
+    test.afficherArrets();
+    // cout<<test.nombreArrets();
     
     system("PAUSE");
+    
     return 0;
 }

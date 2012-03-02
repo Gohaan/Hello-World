@@ -1,14 +1,14 @@
 # Project: ReseauTram
 # Compiler: Default GCC compiler
 # Compiler Type: MingW 3
-# Makefile created by wxDev-C++ wxDev-C++ IDE 7.4.1.13 on 02/03/12 15:24
+# Makefile created by wxDev-C++ wxDev-C++ IDE 7.4.1.13 on 02/03/12 23:21
 
 WXLIBNAME = wxmsw28u
 CPP       = g++.exe
 CC        = gcc.exe
 WINDRES   = "windres.exe"
-OBJ       = Default\ Profile/Arret.o Default\ Profile/Test.o Default\ Profile/Ligne.o Default\ Profile/Tram.o
-LINKOBJ   = "Default Profile/Arret.o" "Default Profile/Test.o" "Default Profile/Ligne.o" "Default Profile/Tram.o"
+OBJ       = Default\ Profile/Arret.o Default\ Profile/Test.o Default\ Profile/Ligne.o Default\ Profile/Tram.o Default\ Profile/Importations.o
+LINKOBJ   = "Default Profile/Arret.o" "Default Profile/Test.o" "Default Profile/Ligne.o" "Default Profile/Tram.o" "Default Profile/Importations.o"
 LIBS      = -L"C:/Program Files (x86)/Dev-Cpp/Lib" -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32  
 INCS      = -I"C:/Program Files (x86)/Dev-Cpp/Include"
 CXXINCS   = -I"C:/Program Files (x86)/Dev-Cpp/lib/gcc/mingw32/3.4.5/include" -I"C:/Program Files (x86)/Dev-Cpp/include/c++/3.4.5/backward" -I"C:/Program Files (x86)/Dev-Cpp/include/c++/3.4.5/mingw32" -I"C:/Program Files (x86)/Dev-Cpp/include/c++/3.4.5" -I"C:/Program Files (x86)/Dev-Cpp/include" -I"C:/Program Files (x86)/Dev-Cpp/" -I"C:/Program Files (x86)/Dev-Cpp/include/3rdparty/wx/plotctrl" -I"C:/Program Files (x86)/Dev-Cpp/include/3rdparty/wx/sheet" -I"C:/Program Files (x86)/Dev-Cpp/include/3rdparty/wx/treemultictrl" -I"C:/Program Files (x86)/Dev-Cpp/include/3rdparty/wx/things" -I"C:/Program Files (x86)/Dev-Cpp/include/3rdparty/wx" -I"C:/Program Files (x86)/Dev-Cpp/include/3rdparty" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/msw" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/generic" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/fl" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/gizmos" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/html" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/mmedia" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/net" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/ogl" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/plot" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/protocol" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/stc" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/svg" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/xml" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx/xrc" -I"C:/Program Files (x86)/Dev-Cpp/include/common/wx" -I"C:/Program Files (x86)/Dev-Cpp/include/common"
@@ -33,11 +33,14 @@ $(BIN): $(OBJ)
 Default\ Profile/Arret.o: $(GLOBALDEPS) Arret.cpp Arret.h
 	$(CPP) -c Arret.cpp -o "Default Profile/Arret.o" $(CXXFLAGS)
 
-Default\ Profile/Test.o: $(GLOBALDEPS) Test.cpp Arret.h Ligne.h Arret.h
+Default\ Profile/Test.o: $(GLOBALDEPS) Test.cpp Importations.h Arret.h Ligne.h Arret.h Tram.h Ligne.h
 	$(CPP) -c Test.cpp -o "Default Profile/Test.o" $(CXXFLAGS)
 
 Default\ Profile/Ligne.o: $(GLOBALDEPS) Ligne.cpp Ligne.h Arret.h
 	$(CPP) -c Ligne.cpp -o "Default Profile/Ligne.o" $(CXXFLAGS)
 
-Default\ Profile/Tram.o: $(GLOBALDEPS) Tram.cpp
+Default\ Profile/Tram.o: $(GLOBALDEPS) Tram.cpp Tram.h Ligne.h Arret.h
 	$(CPP) -c Tram.cpp -o "Default Profile/Tram.o" $(CXXFLAGS)
+
+Default\ Profile/Importations.o: $(GLOBALDEPS) Importations.cpp Importations.h Arret.h Ligne.h Arret.h Tram.h Ligne.h
+	$(CPP) -c Importations.cpp -o "Default Profile/Importations.o" $(CXXFLAGS)

@@ -9,16 +9,18 @@
 #include "Ligne.h"
 #include "Tram.h"
 
-const int NBMAXLIGNES=11;
-
 class Importations{
     public:
-        void importerArrets();
-        void importerLigne();
+        Importations();
+        ~Importations();
+        void afficherArrets();
+        const int nombreArrets();
+        const int nombreLignes();
     private:
-        int nbLigne;
+        int d_nbArrets;
+        int d_nbLignes;
         Arret* TabArrets;
-        Ligne TabLignes[NBMAXLIGNES];
+        Ligne* TabLignes;
 };
 
 

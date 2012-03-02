@@ -1,0 +1,21 @@
+12 1
+Saint Nazaire.
+10 200
+Tuilerie.
+100 200
+Rattachement.
+190 200
+Stade de Bourtzwiller.
+280 200
+Doller.
+370 200
+Musee de l'Auto.
+460 200
+Cite administrative.
+550 200
+Grand Rex.
+640 200
+Republique.
+730 100
+Gare.
+820 100

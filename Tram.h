@@ -16,17 +16,12 @@ class Tram{
         int vitesse();
         bool marche();
         bool sens();
-        void importationTram(const string& nomfichier, int i);
+        // void importationTram(const string& nomfichier, int i);
         void infoTram() ;  
         const int posx() ; 
         const int posy() ;      
     private:
-        int d_id ; 
-        int d_x ; 
-        int d_y ; 
-        int d_ligne;
-        int d_capacite;
-        int d_vitesse;
+        int d_id, d_x, d_y, d_ligne, d_capacite, d_vitesse;
         bool d_marche;
         bool d_sens;
         Arret d_arret;         

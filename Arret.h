@@ -14,10 +14,13 @@ class Arret{
              const int posx();
              const int posy();
              const string nomArret();
+             void afficheArret();
       private:
-              int d_x,d_y;
-              string d_nom;
-              static int tmpsarret;
+             int d_x,d_y;
+             string d_nom;
+             static int tmpsarret;
 };
+
+const ostream& operator<<(ostream& os, Arret& Ar);
 
 #endif

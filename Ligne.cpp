@@ -2,15 +2,9 @@
 
 using namespace std;
 
-Ligne::Ligne(){
-    ImportationArret("Templates/Lignes.txt");
-}
+Ligne::Ligne() : d_numLigne(0), d_nbArrets(0) {}
 
-Ligne::Ligne(const string& nomfichier){
-    ImportationArret(nomfichier);
-}
-
-void Ligne::ImportationArret(const string& nomfichier){
+/*void Ligne::ImportationArret(const string& nomfichier){
     string s;
     int x,y,i=0;
     ifstream fin(nomfichier.c_str());
@@ -28,13 +22,13 @@ void Ligne::ImportationArret(const string& nomfichier){
     }
     else
         cerr<<"Impossible d'ouvrir le fichier! Veuillez verifier l'orthographe."<<endl;
-}
+}*/
 
 void Ligne::afficheLigneTexte()
 {
    if(d_nbArrets != 0 )
      for(int i=0 ; i < d_nbArrets ; i++ )
-                cout << TabArret[i].nomarret()<<' '<< TabArret[i].posx() << ' ' << TabArret[i].posy() <<' '<<endl ;
+                cout << TabArret[i].nomArret()<<' '<< TabArret[i].posx() << ' ' << TabArret[i].posy() <<' '<<endl ;
      else
          cout<<"Aucun arret a afficher.";  
 }
@@ -52,9 +46,9 @@ void Ligne::afficheLigneGraphique()
     for(int i=0; i<d_nbArrets; i++){
         xi = TabArret[i].posx(); yi = TabArret[i].posy();
         if(i%2==0)
-            outtextxy(xi-10,yi-30, const_cast<char *>(TabArret[i].nomarret().c_str() ) );
+            outtextxy(xi-10,yi-30, const_cast<char *>(TabArret[i].nomArret().c_str() ) );
         else
-            outtextxy(xi-10,yi+30, const_cast<char *>(TabArret[i].nomarret().c_str() ) );
+            outtextxy(xi-10,yi+30, const_cast<char *>(TabArret[i].nomArret().c_str() ) );
         line(xi,yi-10,xi,yi+10);
     }
 
@@ -64,32 +58,44 @@ void Ligne::afficheLigneGraphique()
     }
 }
 
+void Ligne::numLigne(int num){
+    d_numLigne=num;
+}
+
+void Ligne::nbArrets(int nb){
+    d_nbArrets=nb;
+}
+
+void Ligne::initTab(int i){
+    TabArret = new Arret[i];
+}
+
+void Ligne::ajouterArret(int i, int x, int y,const string& s){
+    TabArret[i]=Arret(x,y,s);
+}
+
 Arret& Ligne::coordArret(int i){
     return TabArret[i];
 }
 
 string Ligne::nomArret(int i){
-    return TabArret[i].nomarret();
+    return TabArret[i].nomArret();
 }
 
 const int Ligne::nombreArrets(){
-      return d_nbArrets;
+    return d_nbArrets;
 }
 
 const int Ligne::numeroLigne(){
-      return d_numLigne;
+    return d_numLigne;
 }
 
 Ligne::~Ligne(){
-      delete[] TabArret;
-}
-
-Ligne& Ligne::operator<<(const string& s){
-    //A CODER   
+    delete[] TabArret;
 }
 
 const ostream& operator<<(ostream& os , Ligne& l ){
-         l.afficheLigneTexte() ; 
-         return os ; 
+    l.afficheLigneTexte(); 
+    return os; 
 } 
 
