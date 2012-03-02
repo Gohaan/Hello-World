@@ -23,4 +23,6 @@ class Ligne{
      Arret* TabArret; 
 };
 
+const ostream& operator<<(ostream& os , Ligne& l ) ; 
+
 #endif

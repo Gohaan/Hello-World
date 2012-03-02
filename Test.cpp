@@ -5,8 +5,7 @@
 using namespace std;
 
 int main() {
-    Ligne L1;;
-    L1.afficheLigne();
-    cout<<endl;
+    Ligne L1("T.txt") ; 
+    cout << L1 ; 
     system("PAUSE");
 }

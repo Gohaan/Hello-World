@@ -27,7 +27,7 @@ void Ligne::ImportationArret(const string& nomfichier){
             }
     }
     else
-        cerr<<"Impossible d'ouvrir le fichier! Veuillez vérifier l'ortographe."<<endl;
+        cerr<<"Impossible d'ouvrir le fichier! Veuillez verifier l'ortographe."<<endl;
 }
 
 void Ligne::afficheLigne()
@@ -50,3 +50,10 @@ const int Ligne::numeroLigne(){
 Ligne::~Ligne(){
       delete[] TabArret;
 }
+
+
+const ostream& operator<<(ostream& os , Ligne& l ){
+         l.afficheLigne() ; 
+         return os ; 
+} 
+
