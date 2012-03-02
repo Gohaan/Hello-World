@@ -5,11 +5,7 @@
 using namespace std;
 
 int main() {
-    /*string s;
-    cout<<"Nom du fichier : ";
-    cin>>s
-    Ligne L1;
-    cout<<L1.nombreArrets()<<' '<<L1.numeroLigne()<<endl;
+    Ligne L1;;
     L1.afficheLigne();
     cout<<endl;
     system("PAUSE");
