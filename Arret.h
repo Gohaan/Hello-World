@@ -1,26 +1,19 @@
 #ifndef ARRET_H
 #define ARRET_H
 
-#include <iostream>
 #include <string>
-#include <fstream>
-
-using namespace std;
 
 class Arret{
-      public:
-             Arret();
-             Arret(int x, int y,const string& nom);
-             const int posx();
-             const int posy();
-             const string nomArret();
-             void afficheArret();
-      private:
-             int d_x,d_y;
-             string d_nom;
-             static int tmpsarret;
+    public:
+        Arret(std::string nom);
+        
+        std::string nom_arret();
+        Arret* d_suivant;
+        Arret* d_precedent;
+        Arret* d_corr_suiv;
+        Arret* d_corr_prec;
+    private:
+        std::string d_nom;
 };
-
-const ostream& operator<<(ostream& os, Arret& Ar);
 
 #endif

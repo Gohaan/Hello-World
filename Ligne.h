@@ -2,37 +2,24 @@
 #define LIGNE_H
 
 #include <iostream>
-#include <string>
-#include <fstream>
-#include <graphics.h> 
 #include "Arret.h"
 
-
-using namespace std;
-
-class Ligne{
-  public:
-     Ligne();
-     // Ligne(const string& nomfichier);
-     ~Ligne();
-     // void ImportationArret(const string& nomfichier);
-     void afficheLigneTexte();
-     void afficheLigneGraphique();
-     void numLigne(int num);
-     void nbArrets(int nb);
-     void initTab(int i);
-     void ajouterArret(int i, int x, int y,const string& s);
-     Arret& coordArret(int i);
-     string nomArret(int i);
-     const int nombreArrets();
-     const int numeroLigne();
-     Ligne& operator<<(const string& s);
-  private:
-     int d_numLigne;
-     int d_nbArrets;
-     Arret* TabArret;
+class Ligne {
+    public:
+        Ligne(std::string nom_ligne, std::string nom_depart , std::string nom_terminus );
+        void ajouter_arret(std::string nom_arret);
+        Arret* arret(int numero) const;
+        void ajouter_arret(std::string nom_arret, int numero);
+        bool meme_ligne(const Arret* arret1,const Arret* arret2 ) ;
+        bool correspondance(const Arret* arret1,const Arret* arret2 ) ;
+        void faire_correspondre(Arret* arret1 , Arret* arret2);
+        void defaire_correspondance(Arret* arret );
+        void supprimer(int numero);
+        
+        Arret* d_depart;
+        Arret* d_terminus;
+    private:  
+        std::string d_nom;
 };
-
-const ostream& operator<<(ostream& os , Ligne& l ) ; 
 
 #endif

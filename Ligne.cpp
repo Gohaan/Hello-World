@@ -2,100 +2,119 @@
 
 using namespace std;
 
-Ligne::Ligne() : d_numLigne(0), d_nbArrets(0) {}
-
-/*void Ligne::ImportationArret(const string& nomfichier){
-    string s;
-    int x,y,i=0;
-    ifstream fin(nomfichier.c_str());
-    if(fin){
-            fin>>d_nbArrets;
-            fin>>d_numLigne;
-            TabArret=new Arrets[d_nbArrets];
-            while(!fin.eof()) {
-                getline(fin,s,'.');
-                fin>>x;
-                fin>>y;
-                TabArret[i] = Arrets(x,y,s);
-                i++;
-            }
-    }
-    else
-        cerr<<"Impossible d'ouvrir le fichier! Veuillez verifier l'orthographe."<<endl;
-}*/
-
-void Ligne::afficheLigneTexte()
+Ligne::Ligne(string nom_ligne, string nom_depart , string nom_terminus ) : d_nom(nom_ligne)
 {
-   if(d_nbArrets != 0 )
-     for(int i=0 ; i < d_nbArrets ; i++ )
-                cout << TabArret[i].nomArret()<<' '<< TabArret[i].posx() << ' ' << TabArret[i].posy() <<' '<<endl ;
-     else
-         cout<<"Aucun arret a afficher.";  
+    Arret * arret = new Arret(nom_terminus) ; 
+	d_depart = new Arret(nom_depart);
+	d_depart = new Arret(nom_terminus);
+	d_terminus = arret; 
+	d_depart->d_suivant=d_terminus; 
+	d_terminus->d_precedent = d_depart;	
 }
-
-void Ligne::afficheLigneGraphique()
+// Ajoute un nouvelle arrêt en fin de ligne 
+void Ligne::ajouter_arret(string nom_arret)
 {
-    initwindow(1300, 400, "Tramways" );
-    outtextxy(650,20,"Ligne 2");
-    setcolor(WHITE);
+	Arret * arret = new Arret(nom_arret) ; 
+	arret->d_precedent = d_terminus ; 
+	d_terminus->d_suivant=arret ;
 
-    int xi = TabArret[0].posx(), yi= TabArret[0].posy(), xf = TabArret[d_nbArrets-1].posx(), yf = TabArret[d_nbArrets-1].posy() ;
-
-    line(xi,yi,xf,yf);
-
-    for(int i=0; i<d_nbArrets; i++){
-        xi = TabArret[i].posx(); yi = TabArret[i].posy();
-        if(i%2==0)
-            outtextxy(xi-10,yi-30, const_cast<char *>(TabArret[i].nomArret().c_str() ) );
-        else
-            outtextxy(xi-10,yi+30, const_cast<char *>(TabArret[i].nomArret().c_str() ) );
-        line(xi,yi-10,xi,yi+10);
-    }
-
-    while (!kbhit( ))
-    {
-        delay(200);
-    }
+	d_terminus = arret ;
 }
+     
+// Méthode qui retourne le ième arret 
 
-void Ligne::numLigne(int num){
-    d_numLigne=num;
-}
-
-void Ligne::nbArrets(int nb){
-    d_nbArrets=nb;
-}
-
-void Ligne::initTab(int i){
-    TabArret = new Arret[i];
-}
-
-void Ligne::ajouterArret(int i, int x, int y,const string& s){
-    TabArret[i]=Arret(x,y,s);
-}
-
-Arret& Ligne::coordArret(int i){
-    return TabArret[i];
-}
-
-string Ligne::nomArret(int i){
-    return TabArret[i].nomArret();
-}
-
-const int Ligne::nombreArrets(){
-    return d_nbArrets;
-}
-
-const int Ligne::numeroLigne(){
-    return d_numLigne;
-}
-
-Ligne::~Ligne(){
-    delete[] TabArret;
-}
-
-const ostream& operator<<(ostream& os , Ligne& l ){
-    l.afficheLigneTexte(); 
-    return os; 
+Arret* Ligne::arret(int numero) const
+{
+	Arret* crt=d_depart;
+	for(int i = 0 ; crt != 0 && i < numero;i ++ ) 
+		crt=crt->d_suivant ; 
+	return crt; 
 } 
-
+// methode uqi ajouter un arret en position n
+void Ligne::ajouter_arret(string nom_arret, int numero)
+{
+	Arret * nouvel_arret = new Arret(nom_arret) ;
+	Arret * crt = arret(numero) ; 
+	
+	if(crt==d_depart){
+		nouvel_arret->d_suivant=d_depart ;
+		d_depart->d_precedent = nouvel_arret ; 
+		d_depart = nouvel_arret ; 
+	}
+	else if(crt==0) //fin de chaine
+	{
+	nouvel_arret-> d_precedent = d_terminus ; 
+	d_terminus = nouvel_arret;
+	}else 
+	{
+		nouvel_arret->d_precedent = crt->d_precedent ; 
+		nouvel_arret->d_suivant = crt ; 
+		crt->d_precedent = nouvel_arret ; 
+		nouvel_arret->d_precedent->d_suivant=nouvel_arret ; 
+	}
+}
+// Si arret 1 et arret 2 sont sur la meme ligne 
+bool Ligne::meme_ligne(const Arret* arret1,const Arret* arret2 ) 
+{
+	while(arret1->d_suivant != 0 ) 
+        arret1=arret1->d_suivant;
+    while(arret2->d_suivant != 0 )
+	    arret2=arret2->d_suivant ;
+	return arret1==arret2 ; 
+}
+// Retourne Vrai si arret 1 et arret 2 correspondent 
+bool Ligne::correspondance(const Arret* arret1,const Arret* arret2 ) 
+{
+	Arret* crt = arret1->d_corr_suiv ; 
+	
+	while(crt != arret1 && crt != arret2 )
+	{
+		crt = crt->d_corr_suiv ;
+	}
+	return crt == arret2; 
+}
+//Fais correspondre arret1 et arret 2
+void Ligne::faire_correspondre(Arret* arret1 , Arret* arret2)
+{
+	if( arret1 != 0 && arret2 != 0 && !meme_ligne(arret1,arret2) && !correspondance(arret1,arret2) )
+	{
+		arret1->d_corr_prec -> d_corr_suiv = arret2->d_corr_suiv ; 
+		arret2->d_corr_suiv -> d_corr_prec = arret1->d_corr_prec;
+		arret2->d_corr_suiv = arret1 ; 
+		arret1->d_corr_prec = arret2 ; 
+	}
+}
+// Enlève arret de la liste de correspondance 
+void Ligne::defaire_correspondance(Arret * arret ) {
+    if(arret != 0 ) {
+    	arret->d_corr_prec->d_corr_suiv = arret->d_corr_suiv;
+    	arret->d_corr_suiv->d_corr_prec = arret->d_corr_prec;
+    	arret->d_corr_prec = arret ;
+    	arret->d_corr_suiv = arret ; 
+    	}
+}
+//Supprime le numero ieme arret de la ligne 
+void Ligne::supprimer(int numero)
+{
+    if(d_depart->d_suivant != d_terminus ) 
+    {
+    	Arret* as = arret(numero) ;
+    	defaire_correspondance(as) ; 
+    	
+    	if( as==0 || as == d_terminus)
+    	{
+    		d_terminus = d_terminus->d_precedent ; 
+    		d_terminus->d_suivant = 0 ; 
+    	}
+    	else if(as == d_depart)
+    	{
+    		d_depart=d_depart->d_suivant;
+    		d_depart->d_precedent = 0 ; 
+    	}
+    	else 
+    	{
+    		as->d_precedent->d_suivant = as->d_suivant ; 
+    		as->d_suivant->d_precedent = as->d_precedent ; 
+    	}
+    }
+}
