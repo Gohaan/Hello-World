@@ -2,6 +2,9 @@
 
 using namespace std;
 
+Ligne::Ligne(string nom_ligne) : d_nom(nom_ligne){
+}
+
 Ligne::Ligne(string nom_ligne, string nom_depart , string nom_terminus ) : d_nom(nom_ligne)
 {
     Arret * arret = new Arret(nom_terminus) ; 
@@ -17,7 +20,6 @@ void Ligne::ajouter_arret(string nom_arret)
 	Arret * arret = new Arret(nom_arret) ; 
 	arret->d_precedent = d_terminus ; 
 	d_terminus->d_suivant=arret ;
-
 	d_terminus = arret ;
 }
      
@@ -62,7 +64,93 @@ bool Ligne::meme_ligne(const Arret* arret1,const Arret* arret2 )
 	    arret2=arret2->d_suivant ;
 	return arret1==arret2 ; 
 }
-// Retourne Vrai si arret 1 et arret 2 correspondent 
+//Supprime le numero ieme arret de la ligne 
+void Ligne::supprimer(int numero)
+{
+    if(d_depart->d_suivant != d_terminus ) 
+    {
+    	Arret* as = arret(numero) ;
+    	// defaire_correspondance(as) ; 
+    	
+    	if( as==0 || as == d_terminus)
+    	{
+    		d_terminus = d_terminus->d_precedent ; 
+    		d_terminus->d_suivant = 0 ; 
+    	}
+    	else if(as == d_depart)
+    	{
+    		d_depart=d_depart->d_suivant;
+    		d_depart->d_precedent = 0 ; 
+    	}
+    	else 
+    	{
+    		as->d_precedent->d_suivant = as->d_suivant ; 
+    		as->d_suivant->d_precedent = as->d_precedent ; 
+    	}
+    }
+}
+//Importer liste d'arret
+void Ligne::importerArret() 
+{
+     string nom_fichier, nom_arret;
+     int xcor, ycor;
+     int j;
+     cout<<"Nom du fichier :";
+     cin>>nom_fichier;
+     ifstream lect(nom_fichier.c_str());
+    
+     if(lect)
+     {
+          lect>>j;
+          
+          getline(lect,nom_arret,'.');
+          lect>>xcor;
+          lect>>ycor;
+          
+          Arret* arret = new Arret(nom_arret,xcor,ycor);
+          Arret* tmp = new Arret(nom_arret,xcor,ycor);
+          
+          arret->d_precedent = 0;
+          d_depart=arret; 
+          arret = arret->d_suivant;
+          
+          for( int i=1 ; i < j ; i++ ) 
+          {
+           getline(lect,nom_arret,'.'); 
+           lect>>xcor;
+           lect>>ycor;
+           
+           arret->d_nom=nom_arret;
+           arret->d_x=xcor; arret->d_y=ycor ;
+           
+           arret->afficherArret();
+           
+           tmp=arret;
+           tmp->afficherArret();
+           
+           if ( i<j-1 ) { 
+                arret->d_precedent=tmp;
+                arret=arret->d_suivant;
+                tmp = tmp->d_suivant;
+                cout <<"Test1"; 
+           }
+           else {
+                arret->d_precedent=tmp;
+                arret->d_suivant=0;
+                d_terminus = arret;
+                cout <<"Test2";
+           }
+           
+          }
+     }
+     else
+     {
+      cout<<"Ouverture du fichier impossible";
+     }
+}
+
+
+/*/ Retourne Vrai si arret 1 et arret 2 correspondent 
 bool Ligne::correspondance(const Arret* arret1,const Arret* arret2 ) 
 {
 	Arret* crt = arret1->d_corr_suiv ; 
@@ -92,29 +180,5 @@ void Ligne::defaire_correspondance(Arret * arret ) {
     	arret->d_corr_prec = arret ;
     	arret->d_corr_suiv = arret ; 
     	}
-}
-//Supprime le numero ieme arret de la ligne 
-void Ligne::supprimer(int numero)
-{
-    if(d_depart->d_suivant != d_terminus ) 
-    {
-    	Arret* as = arret(numero) ;
-    	defaire_correspondance(as) ; 
-    	
-    	if( as==0 || as == d_terminus)
-    	{
-    		d_terminus = d_terminus->d_precedent ; 
-    		d_terminus->d_suivant = 0 ; 
-    	}
-    	else if(as == d_depart)
-    	{
-    		d_depart=d_depart->d_suivant;
-    		d_depart->d_precedent = 0 ; 
-    	}
-    	else 
-    	{
-    		as->d_precedent->d_suivant = as->d_suivant ; 
-    		as->d_suivant->d_precedent = as->d_precedent ; 
-    	}
-    }
-}
+}*/
+

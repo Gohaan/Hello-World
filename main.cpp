@@ -1,17 +1,20 @@
-#include <iostream>
 #include "Ligne.h"
 
 using namespace std;
 
 int main()
 {
-	/* string s; cin >> s;
-	Arret* a = new Arret(s);
-	cout<<a->nom_arret(); */
-    Ligne ligne("Ligne 1","Nessel","Universite");
-    ligne.ajouter_arret("Test2");
-    Arret* crt=ligne.d_terminus;
-    cout<<crt->nom_arret();
-
+    /*Arret* ar = new Arret("Test");
+    ar->changerNom("plop"); ar->AffecterCoord(50,50);
+    Arret* bl = new Arret("Test");
+    bl=ar;
+    bl->afficherArret();
+    */
+    
+    Ligne le("Ligne 1");
+    le.importerArret();
+    //cout<<ligne.d_departd_nom;
+    //ligne.d_depart.afficherArret();
+    //ligne.d_terminus.afficherArret();
 	system("PAUSE");
 }
